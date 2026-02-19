@@ -9,7 +9,6 @@ import yaml
 
 from ts_status_stats.config import Config, load_config
 
-
 class TestConfig:
     """Tests for the Config dataclass."""
 
@@ -72,7 +71,7 @@ class TestLoadConfig:
                 yaml.dump(config_data, f)
 
             with patch("ts_status_stats.config.Path.home", return_value=Path(tmpdir)):
-                config = load_config()
+                config = load_config(config_path)
 
             assert config.interval == 60
             assert config.base_location == Path(tmpdir)
@@ -94,7 +93,7 @@ class TestLoadConfig:
 
             with patch("ts_status_stats.config.Path.home", return_value=Path(tmpdir)):
                 with pytest.raises(ValueError, match="Configuration file is empty"):
-                    load_config()
+                    load_config(config_path)
 
     def test_load_config_missing_required_fields(self):
         """Test load_config raises error for missing required fields."""
@@ -110,7 +109,7 @@ class TestLoadConfig:
                 with pytest.raises(
                     ValueError, match="Configuration is missing required fields"
                 ):
-                    load_config()
+                    load_config(config_path)
 
     def test_load_config_default_file_name_format(self):
         """Test load_config uses default file_name_format when not specified."""
@@ -125,6 +124,6 @@ class TestLoadConfig:
                 yaml.dump(config_data, f)
 
             with patch("ts_status_stats.config.Path.home", return_value=Path(tmpdir)):
-                config = load_config()
+                config = load_config(config_path)
 
             assert config.file_name_format == "tailscale-status-{date}.parquet"

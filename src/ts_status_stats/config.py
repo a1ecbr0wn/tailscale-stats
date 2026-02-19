@@ -24,9 +24,13 @@ class Config:
         self.base_location.mkdir(parents=True, exist_ok=True)
 
 
-def load_config() -> Config:
+def load_config(config_path: Path | None = None) -> Config:
     """
-    Load configuration from ~/.config/ts-status.yml.
+    Load configuration from the parameter passed in or default to 
+    `~/.config/ts-status.yml`.
+
+    Args:
+        config_path: Path to the configuration file
 
     Returns:
         Config: Configuration object with settings
@@ -35,7 +39,11 @@ def load_config() -> Config:
         FileNotFoundError: If config file is not found
         ValueError: If configuration is invalid
     """
-    config_path = Path.home() / ".config" / "ts-status.yml"
+
+    if config_path:
+        config_path = Path(config_path)
+    else:
+        config_path = Path.home() / ".config" / "ts-status.yml"
 
     if not config_path.exists():
         raise FileNotFoundError(

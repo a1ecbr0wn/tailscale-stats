@@ -26,12 +26,10 @@ tailscale-stats/
 ├── example/                      # Example files and documentation
 │   ├── example_stats.json        # Sample Tailscale status output
 │   └── ts-status.yml.example     # Example configuration file
+├── docs/                         # Project documentation
 ├── setup.py                      # Package setup and dependencies
 ├── pytest.ini                    # Pytest configuration
 ├── README.md                     # User documentation
-├── DEVELOPMENT.md                # This file
-├── CHANGELOG.md                  # Version history
-├── REQUIREMENTS.md               # Original requirements
 └── .gitignore                    # Git ignore rules
 ```
 
@@ -51,11 +49,24 @@ tailscale-stats/
 cd tailscale-stats
 ```
 
-- Create a virtual environment (recommended):
+- Create a virtual environment with venv:
 
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+- or create a virtual environment with pyenv:
+
+```bash
+pyenv local 3.10.12
+```
+
+- and another way with pyenv:
+
+```bash
+pyenv virtualenv 3.10.12 tailscale-stats
+pyenv local tailscale-stats
 ```
 
 - Install in development mode with test dependencies:
@@ -99,24 +110,6 @@ pytest -k "test_flatten" -v
 ## Code Style
 
 This project follows PEP 8 style guidelines.
-
-### Format code with black
-
-```bash
-black src/ tests/
-```
-
-### Check code style with flake8
-
-```bash
-flake8 src/ tests/
-```
-
-### Type checking with mypy
-
-```bash
-mypy src/
-```
 
 ## Module Documentation
 
