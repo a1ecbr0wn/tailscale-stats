@@ -1,0 +1,22 @@
+# Tailscale Status Stats Configuration Example
+#
+# Copy this file to ~/.config/ts-status.yml and customize for your setup
+
+# Collection interval in seconds
+# Recommended: 60 (1 minute), 300 (5 minutes), or 3600 (1 hour)
+# Minimum: 1 second
+interval: 60
+
+# Base directory for storing Parquet files
+# Will be created if it doesn't exist
+# Supports ~ for home directory expansion
+base_location: ~/tailscale-stats-data
+
+# Optional: Custom file name format
+# Use {date} placeholder for YYYYMMDD format
+# Default: tailscale-status-{date}.parquet
+# Examples:
+#   - ts-{date}.parquet
+#   - tailscale-{date}-data.parquet
+#   - status-{date}.parquet
+file_name_format: tailscale-status-{date}.parquet
